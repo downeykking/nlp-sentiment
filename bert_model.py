@@ -4,7 +4,7 @@ import torch.nn.functional as F
 import pandas as pd
 import numpy as np
 import random
-import time
+
 from torchtext.legacy import data
 from transformers import BertTokenizer, BertModel
 
@@ -38,11 +38,12 @@ unk_token_idx = tokenizer.unk_token_id
 def tokenize_and_convert(sentence):
     if sentence == []:
         sentence += [" "]
-    tokens = tokenizer.encode(sentence,
-                              add_special_tokens=True,
-                              # max_length=max_input_length,
-                              # padding="max_length",
-                              truncation=True)
+    tokens = tokenizer.encode(
+        sentence,
+        add_special_tokens=True,
+        # max_length=max_input_length,
+        # padding="max_length",
+        truncation=True)
     return tokens
 
 
@@ -89,7 +90,6 @@ test_dataset = data.TabularDataset(path='./test.csv',
 vocab_size = len(tokenizer.vocab)
 print(vars(train_dataset.examples[6]))
 
-
 # # Recurrent neural network (many-to-one)
 # class fasttext(nn.Module):
 #     def __init__(self, bert, num_classes):
@@ -112,7 +112,6 @@ print(vars(train_dataset.examples[6]))
 #         out = self.fc(out)
 #         return out
 
-
 # bert = BertModel.from_pretrained('bert-base-uncased')
 # model = fasttext(bert, num_classes).to(device)
 
@@ -123,7 +122,6 @@ print(vars(train_dataset.examples[6]))
 # # Loss and optimizer
 # criterion = nn.CrossEntropyLoss()
 # optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
-
 
 # # Train the model
 # def train(model, train_loader):
@@ -155,7 +153,6 @@ print(vars(train_dataset.examples[6]))
 #     # Loss, Acc
 #     return total_loss / len(train_loader), correct * 100 / total
 
-
 # # Test the model
 # def valid(model, valid_loader):
 #     model.eval()
@@ -178,7 +175,6 @@ print(vars(train_dataset.examples[6]))
 #     # Loss, Acc
 #     return total_loss / len(valid_loader), correct * 100 / total
 
-
 # # output
 # def output(model, test_loader):
 #     model.eval()
@@ -199,7 +195,6 @@ print(vars(train_dataset.examples[6]))
 #         df = pd.DataFrame(data)
 #         print(df.head())
 #         df.to_csv("answer.csv", index=False)
-
 
 # def predict(model, tokenizer, text):
 #     # 方法1：
@@ -223,7 +218,6 @@ print(vars(train_dataset.examples[6]))
 #     # _, predicted = torch.max(output.data, dim=1)
 #     # return predicted.item()
 
-
 # def fun(model, num_epochs):
 #     for epoch in range(num_epochs):
 #         start_time = time.time()
@@ -238,7 +232,6 @@ print(vars(train_dataset.examples[6]))
 #             'Epoch [{}/{}], Loss: {:.4f}, Acc: {:.2f}%, Valid Loss: {:.4f}, Acc: {:.2f}%, Time: {}m {}s'
 #             .format(epoch + 1, num_epochs, train_loss, train_acc, valid_loss,
 #                     valid_acc, epoch_mins, epoch_secs))
-
 
 # def main(test_flag=False):
 
@@ -259,7 +252,6 @@ print(vars(train_dataset.examples[6]))
 #     # 保存模型
 #     state = {'model': model.state_dict(), 'optimizer': optimizer.state_dict()}
 #     torch.save(state, log_dir)
-
 
 # if __name__ == '__main__':
 #     main(False)
